@@ -42,16 +42,14 @@ public class BratskFinder {
 
         if (MainFrame.TEST) {
             debts = new ArrayList<>();
-            debts.add(new Debt("sbor", "dbid", "customerid", "Ваня", new BigDecimal(0), new BigDecimal(1000), Arrays.asList("Иван Иванович И.", "Петр Петрович П."), Arrays.asList("1234", "1060"), Arrays.asList(parseDate("2017-11-15")), "orderid", "baseurl"));
-            debts.add(new Debt("sbor", "dbid", "customerid", "Ваня", new BigDecimal(0), new BigDecimal(2000), Arrays.asList("Иван Иванович И.", "Петр Петрович П."), Arrays.asList("8000", "9000"), Arrays.asList(parseDate("2017-11-15")), "orderid", "baseurl"));
-            debts.add(new Debt("sbor", "dbid", "customerid", "Ваня", new BigDecimal(0), new BigDecimal(750), Arrays.asList("Иван2 Иванович2 И.2"), Arrays.asList("1234"), Arrays.asList(parseDate("2017-11-14")), "orderid", "baseurl"));
+            debts.add(new Debt("sbor", "dbid", "customerid", "Ваня", new BigDecimal(0), new BigDecimal(1000), Arrays.asList("РАИЛЯ РАИЛЬЕВНА С."), Arrays.asList("1234", "1060"), Arrays.asList(parseDate("2017-11-15")), "orderid", "baseurl"));
+            debts.add(new Debt("sbor", "dbid", "customerid", "Ваня", new BigDecimal(0), new BigDecimal(2000), Arrays.asList("РАИЛЯ РАИЛЬЕВНА С.", "НАТАЛЬЯ ВИКТОРОВНА Д."), Arrays.asList("8000", "9000"), Arrays.asList(parseDate("2017-11-15")), "orderid", "baseurl"));
+            debts.add(new Debt("sbor", "dbid", "customerid", "Ваня", new BigDecimal(0), new BigDecimal(750), Arrays.asList("НАТАЛЬЯ ВИКТОРОВНА Д."), Arrays.asList("1234"), Arrays.asList(parseDate("2017-11-14")), "orderid", "baseurl"));
 
             payments = new ArrayList<>();
-            payments.add(new ru.misterparser.paymentrobot.domain.Sms("filename", "sheetname", 1, parseDate("2017-11-15"), "Сбербанк Онлайн. Иван2 Иванович2 И.2 перевел(а) Вам 750.00 RUB. Сообщение: \"1234\"").toPayment());
-            payments.add(new ru.misterparser.paymentrobot.domain.Sms("filename", "sheetname", 2, parseDate("2017-11-15"), "Сбербанк Онлайн. Иван Иванович И. перевел(а) Вам 799.99 RUB. Сообщение: \"1234\"").toPayment());
-            payments.add(new ru.misterparser.paymentrobot.domain.Sms("filename", "sheetname", 3, parseDate("2017-11-15"), "Сбербанк Онлайн. Петр Петрович П. перевел(а) Вам 200.00 RUB. Сообщение: \"\"").toPayment());
-            payments.add(new ru.misterparser.paymentrobot.domain.Sms("filename", "sheetname", 4, parseDate("2017-11-15"), "Сбербанк Онлайн. Иван Иванович И. перевел(а) Вам 1600.01 RUB. Сообщение: \"8000\"").toPayment());
-            payments.add(new ru.misterparser.paymentrobot.domain.Sms("filename", "sheetname", 5, parseDate("2017-11-15"), "Сбербанк Онлайн. Петр Петрович П. перевел(а) Вам 400.00 RUB. Сообщение: \"9000\"").toPayment());
+            payments.add(new ru.misterparser.paymentrobot.domain.Sms("filename", "sheetname", 1, parseDate("2017-11-15"), "ECMC5478 19:23 перевод 2390.00р от РАИЛЯ РАИЛЬЕВНА С.").toPayment());
+            payments.add(new ru.misterparser.paymentrobot.domain.Sms("filename", "sheetname", 2, parseDate("2017-11-15"), "ECMC5478 07:24 перевод 232.00р от НАТАЛЬЯ ВИКТОРОВНА Д.").toPayment());
+            payments.add(new ru.misterparser.paymentrobot.domain.Sms("filename", "sheetname", 3, parseDate("2017-11-14"), "ECMC5478 07:24 перевод 232.00р от НАТАЛЬЯ ВИКТОРОВНА Д.").toPayment());
         }
 
         int foundDebtCount = 0;
