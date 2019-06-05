@@ -754,7 +754,7 @@ public class MainFrame implements ConfigurationApplier {
                 defaultComboBoxModel.addElement("https://62sp.ru");
                 defaultComboBoxModel.addElement("https://64pokupki.ru");
                 defaultComboBoxModel.addElement("https://kras-sp.ru");
-                defaultComboBoxModel.addElement("https://kr-sp.ru");
+                defaultComboBoxModel.addElement("https://krai-sp.ru");
                 defaultComboBoxModel.addElement("https://kuz-sp.ru");
                 defaultComboBoxModel.addElement("https://msk-sp.ru");
                 defaultComboBoxModel.addElement("https://nn-sp.ru");
