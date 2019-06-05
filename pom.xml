@@ -6,7 +6,7 @@
     <groupId>ru.misterparser.paymentrobot</groupId>
     <name>PaymentRobot</name>
     <artifactId>PaymentRobot</artifactId>
-    <version>1.5.63</version>
+    <version>1.5.70</version>
     <packaging>jar</packaging>
 
     <properties>
