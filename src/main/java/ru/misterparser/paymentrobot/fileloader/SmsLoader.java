@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import ru.misterparser.common.Utils;
 import ru.misterparser.common.excel.ExcelUtils;
 import ru.misterparser.common.flow.EventProcessor;
 import ru.misterparser.paymentrobot.Configuration;
@@ -52,6 +53,7 @@ public class SmsLoader {
                     if (messageCell != null) {
                         boolean colored = ExcelUtils.isColored(messageCell);
                         String message = ExcelUtils.getTextFromCell(messageCell);
+                        message = Utils.squeezeText(message);
                         if (StringUtils.equalsIgnoreCase(message, "Message")) {
                             continue;
                         }
@@ -100,6 +102,7 @@ public class SmsLoader {
             Pattern pattern7 = Pattern.compile("отправьте код");
             Pattern pattern8 = Pattern.compile("пароль: \\d+");
             Pattern pattern9 = Pattern.compile("покупка \\d+р");
+            Matcher paymentMatcher0 = Sms.PATTERN_0.matcher(sms.getMessage());
             Matcher paymentMatcher1 = Sms.PATTERN_1.matcher(sms.getMessage());
             Matcher paymentMatcher2 = Sms.PATTERN_2.matcher(sms.getMessage());
             Matcher paymentMatcher3 = Sms.PATTERN_3.matcher(sms.getMessage());
@@ -113,7 +116,9 @@ public class SmsLoader {
             Matcher matcher7 = pattern7.matcher(sms.getMessage());
             Matcher matcher8 = pattern8.matcher(sms.getMessage());
             Matcher matcher9 = pattern9.matcher(sms.getMessage());
-            if (paymentMatcher1.find()) {
+            if (paymentMatcher0.find()) {
+                Double.parseDouble(paymentMatcher0.group(1));
+            } else if (paymentMatcher1.find()) {
                 Double.parseDouble(paymentMatcher1.group(2));
             } else if (paymentMatcher2.find()) {
                 Double.parseDouble(paymentMatcher2.group(1));

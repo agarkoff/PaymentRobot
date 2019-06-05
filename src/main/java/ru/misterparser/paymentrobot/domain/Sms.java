@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 public class Sms extends AbstractFileRecord {
     private Date date;
     private String message;
+    public static final Pattern PATTERN_0 = Pattern.compile(".*перевод ([0-9.]+)р от (.*)\\s+Баланс.*\\s+(\\.\\s*Сообщение: \"(.*)\")?");
     public static final Pattern PATTERN_1 = Pattern.compile("Сбербанк Онлайн. (.*) перевел\\(а\\) Вам (\\d+.\\d{2}) RUB(\\.\\s*Сообщение: \"(.*)\")?");
     public static final Pattern PATTERN_2 = Pattern.compile("зачисление ([0-9.]+)р.*s karty \\d{4}\\*{4}(\\d{4})");
     public static final Pattern PATTERN_3 = Pattern.compile("зачисление ([0-9.]+)р.*Баланс");
@@ -53,11 +54,16 @@ public class Sms extends AbstractFileRecord {
     public Payment toPayment() {
         Payment payment = new Payment();
         payment.setDate(getDate());
+        Matcher matcher0 = PATTERN_0.matcher(this.getMessage());
         Matcher matcher1 = PATTERN_1.matcher(this.getMessage());
         Matcher matcher2 = PATTERN_2.matcher(this.getMessage());
         Matcher matcher3 = PATTERN_3.matcher(this.getMessage());
         Matcher matcher4 = PATTERN_4.matcher(this.getMessage());
-        if(matcher1.find()) {
+        if(matcher0.find()) {
+            payment.setSum(new BigDecimal(matcher0.group(1)));
+            payment.setName(matcher0.group(2));
+            payment.setCard(matcher0.group(3));
+        } else if(matcher1.find()) {
             payment.setSum(new BigDecimal(matcher1.group(2)));
             payment.setName(matcher1.group(1));
             payment.setCard(matcher1.group(4));
