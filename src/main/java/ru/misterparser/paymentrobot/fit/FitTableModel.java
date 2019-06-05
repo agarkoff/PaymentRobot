@@ -14,8 +14,6 @@ import ru.misterparser.paymentrobot.MainFrame;
 import ru.misterparser.paymentrobot.Payment;
 import ru.misterparser.paymentrobot.domain.AbstractFileRecord;
 
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
@@ -37,12 +35,7 @@ public class FitTableModel extends DefaultTableModel {
 
     public FitTableModel() {
         super(getColumnNames(), 0);
-        addTableModelListener(new TableModelListener() {
-            @Override
-            public void tableChanged(TableModelEvent e) {
-                updateRowHeights();
-            }
-        });
+        addTableModelListener(e -> updateRowHeights());
     }
 
     private static String[] getColumnNames() {
