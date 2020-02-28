@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -31,13 +31,14 @@ import ru.misterparser.common.flow.EventProcessor;
 import ru.misterparser.common.flow.ThreadFinishStatus;
 import ru.misterparser.common.gui.tree.TreeUtils;
 import ru.misterparser.common.model.Category;
+import ru.misterparser.common.nextpage.NextPageHtmlCleanerUtils;
 import ru.misterparser.paymentrobot.domain.AbstractFileRecord;
 import ru.misterparser.paymentrobot.domain.Debt;
 import ru.misterparser.paymentrobot.fileloader.BankTransactionLoader;
 import ru.misterparser.paymentrobot.fileloader.SmsLoader;
 import ru.misterparser.paymentrobot.fit.Fit;
-import ru.misterparser.paymentrobot.siteloader.BratskDebtLoaderOld;
 import ru.misterparser.paymentrobot.siteloader.BratskDebtLoaderNew;
+import ru.misterparser.paymentrobot.siteloader.BratskDebtLoaderOld;
 import ru.misterparser.paymentrobot.siteloader.DebtLoader;
 import ru.misterparser.paymentrobot.siteloader.SpDebtLoader;
 
@@ -245,7 +246,7 @@ public class Parser extends ControlledRunnable {
     }
 
     private String getNextPage(TagNode rootNode) {
-        return ParserUtils.getNextPage(rootNode, ".//ul[@id='yw1']/li[@class='next']/a", "Следующая >", Configuration.get().BASE_URL);
+        return NextPageHtmlCleanerUtils.getNextPage(rootNode, ".//ul[@id='yw1']/li[@class='next']/a", "Следующая >", Configuration.get().BASE_URL);
     }
 
     private void processTreeNode(DefaultMutableTreeNode treeNode) throws XPatherException, IOException, InterruptedException, InvalidFormatException {

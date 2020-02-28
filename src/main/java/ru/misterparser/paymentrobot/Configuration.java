@@ -1,6 +1,6 @@
 package ru.misterparser.paymentrobot;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import ru.misterparser.common.configuration.ConfigurationSetter;
 import ru.misterparser.common.gui.GuiUtils;
 

@@ -62,7 +62,7 @@
         <dependency>
             <groupId>ru.misterparser.common</groupId>
             <artifactId>MisterParserCommon</artifactId>
-            <version>1.2.0</version>
+            <version>1.4.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.thoughtworks.xstream</groupId>

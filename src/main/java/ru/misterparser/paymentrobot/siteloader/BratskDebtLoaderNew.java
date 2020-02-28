@@ -8,8 +8,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.logging.log4j.LogManager;
@@ -20,6 +20,7 @@ import ru.misterparser.common.AuthUtils;
 import ru.misterparser.common.MisterParserFileUtils;
 import ru.misterparser.common.ParserUtils;
 import ru.misterparser.common.Utils;
+import ru.misterparser.common.auth.AuthData;
 import ru.misterparser.common.configuration.ConfigurationUtils;
 import ru.misterparser.common.flow.EventProcessor;
 import ru.misterparser.paymentrobot.Configuration;
@@ -90,7 +91,14 @@ public class BratskDebtLoaderNew extends DebtLoader {
             Map<String, String> credentials = new LinkedHashMap<>();
             credentials.put("username", Configuration.get().LOGIN);
             credentials.put("password", Configuration.get().PASSWORD);
-            AuthUtils.authorize(httpClient, "http://spbratsk.ru/forum/phpBB3/ucp.php?mode=login", ".//form[@id='login']", credentials, "UTF-8");
+            AuthData authData = AuthData.builder()
+                    .authUrl("http://spbratsk.ru/forum/phpBB3/ucp.php?mode=login")
+                    .encoding("UTF-8")
+                    .apacheHttpClient(httpClient)
+                    .authFormXPath(".//form[@id='login']")
+                    .credentials(credentials)
+                    .build();
+            AuthUtils.authorizeWithApache(authData);
         }
         for (Cookie cookie : httpClient.getCookieStore().getCookies()) {
             if (StringUtils.startsWithIgnoreCase(cookie.getName(), "phpbb3")) {

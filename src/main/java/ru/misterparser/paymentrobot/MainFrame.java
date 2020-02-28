@@ -12,8 +12,8 @@ import com.sun.java.swing.plaf.windows.WindowsTableHeaderUI;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -192,7 +192,7 @@ public class MainFrame implements ConfigurationApplier {
                         progressBar.setVisible(true);
                     } catch (Exception var3) {
                         MainFrame.log.debug("Exception", var3);
-                        JOptionPane.showMessageDialog(MainFrame.this.frame, "Ошибка запуска потока\n" + ExceptionUtils.getFullStackTrace(var3), "Робот оплат", 0);
+                        JOptionPane.showMessageDialog(MainFrame.this.frame, "Ошибка запуска потока\n" + ExceptionUtils.getStackTrace(var3), "Робот оплат", 0);
                         resetButtonState();
                     }
                 }
@@ -545,7 +545,7 @@ public class MainFrame implements ConfigurationApplier {
                 }
             });
         } catch (Throwable var2) {
-            JOptionPane.showMessageDialog(this.frame, "Ошибка создания окна\n" + ExceptionUtils.getFullStackTrace(var2), "Робот оплат", 0);
+            JOptionPane.showMessageDialog(this.frame, "Ошибка создания окна\n" + ExceptionUtils.getStackTrace(var2), "Робот оплат", 0);
         }
     }
 
@@ -999,7 +999,7 @@ public class MainFrame implements ConfigurationApplier {
         } catch (Exception var3) {
             log.debug("Exception", var3);
             if (verbose) {
-                JOptionPane.showMessageDialog(this.frame, "Ошибка установки параметров\n" + ExceptionUtils.getFullStackTrace(var3), "Робот оплат", 0);
+                JOptionPane.showMessageDialog(this.frame, "Ошибка установки параметров\n" + ExceptionUtils.getStackTrace(var3), "Робот оплат", 0);
             }
         }
 
